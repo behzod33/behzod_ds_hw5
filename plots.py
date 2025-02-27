@@ -1,14 +1,24 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.figure_factory as ff
 import plotly.express as px
 from mlxtend.plotting import plot_decision_regions
 
+
 def plot_correlation_matrix(df):
-    """Построение матрицы корреляции."""
-    fig, ax = plt.subplots(figsize=(8, 6), dpi=200)
-    sns.heatmap(df.corr(), annot=True, cmap="coolwarm", ax=ax)
-    ax.set_title("Матрица корреляции")
+    """Построение интерактивной матрицы корреляции."""
+    corr_matrix = df.corr().round(2)
+    
+    fig = ff.create_annotated_heatmap(
+        z=corr_matrix.values,
+        x=list(corr_matrix.columns),
+        y=list(corr_matrix.index),
+        annotation_text=corr_matrix.values.round(2),
+        colorscale="Viridis",
+        showscale=True
+    )
     return fig
+
 
 def plot_3d_scatter(df, top3):
     """Построение 3D Scatter Plot."""
@@ -47,3 +57,4 @@ def plot_roc_curve(fprs, tprs, aucs):
     ax.legend(loc="lower right")
     ax.grid(True)
     return fig
+
