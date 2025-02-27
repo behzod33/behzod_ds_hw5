@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 from data_processing import load_data, preprocess_data, get_top_features
-from models import train_models, evaluate_models, plot_confusion_matrix, get_classification_metrics
+from models import train_models, evaluate_models, plot_confusion_matrix
 from plots import plot_correlation_matrix, plot_3d_scatter, plot_decision_boundaries, plot_roc_curve
 
 # Загрузка данных
@@ -97,11 +97,6 @@ if selected_eval_model:
 
     # Делаем предсказание
     y_pred = model.predict(X_test[top2])
-
-     # Выводим Precision, Recall, F1-score
-    st.write(f"### Precision, Recall, F1-score - {selected_eval_model}")
-    class_report = get_classification_metrics(y_test, y_pred)
-    st.table(class_report)
 
     # Выводим Confusion Matrix
     st.write(f"### Confusion Matrix - {selected_eval_model}")
