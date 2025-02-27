@@ -72,27 +72,6 @@ def plot_confusion_matrix(y_true, y_pred, model_name):
     ax.set_title(f"Confusion Matrix - {model_name}")
     return fig
 
-def get_classification_metrics(y_true, y_pred):
-    """Формирование отчёта о классификации в виде DataFrame для Precision, Recall, F1-score."""
-    report = classification_report(y_true, y_pred, output_dict=True)
-    
-    # Извлекаем только нужные метрики (Precision, Recall, F1-score)
-    metrics = {
-        "Precision": {},
-        "Recall": {},
-        "F1-score": {}
-    }
-    
-    # Перебираем классы 0 и 1, а также макро и взвешенные метрики
-    for key in ['0', '1']:
-        metrics["Precision"][key] = report[key]["precision"]
-        metrics["Recall"][key] = report[key]["recall"]
-        metrics["F1-score"][key] = report[key]["f1-score"]
-
-    # Преобразуем в DataFrame для отображения
-    df_report = pd.DataFrame(metrics)
-    return df_report.round(2)
-
 
 def evaluate_models(models, X_train, y_train, X_test, y_test):
     """Оценка моделей: расчет Train AUC, Test AUC и разницы AUC."""
