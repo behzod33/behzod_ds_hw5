@@ -1,0 +1,6 @@
+__pycache__/
+.ipynb_checkpoints/
+.venv/
+behzod_ds_hw5.ipynb
+behzod_ds_hw5_draft.py
+streamlit_app.py
